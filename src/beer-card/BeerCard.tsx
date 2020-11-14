@@ -4,6 +4,7 @@ import Modal from "antd/lib/modal/Modal";
 import React, { useState } from "react";
 import { BeerInfo } from "../browse-beers/BrowseBeers";
 import "./beer-card.css";
+import { StarOutlined, StarFilled } from "@ant-design/icons";
 
 interface BeerCardProps {
   info: BeerInfo;
@@ -14,6 +15,7 @@ export const BeerCard = (props: BeerCardProps) => {
   return (
     <>
       <Card hoverable className="card-design" onClick={() => setVisible(true)}>
+        <StarOutlined />
         <img className="beer-img" alt="beer" src={props.info.image_url} />
         <Meta title={props.info.name} />
       </Card>
