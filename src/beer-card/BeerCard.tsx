@@ -2,9 +2,9 @@ import Card from "antd/lib/card";
 import Meta from "antd/lib/card/Meta";
 import Modal from "antd/lib/modal/Modal";
 import React, { useState } from "react";
-import { BeerInfo } from "../browse-beers/BrowseBeers";
 import "./beer-card.css";
 import { StarOutlined, StarFilled } from "@ant-design/icons";
+import { BeerInfo } from "../models/BeerInfo";
 
 interface BeerCardProps {
   info: BeerInfo;
