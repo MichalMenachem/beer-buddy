@@ -5,6 +5,9 @@ import React, { useState } from "react";
 import "./beer-card.css";
 import { StarOutlined, StarFilled } from "@ant-design/icons";
 import { BeerInfo } from "../models/BeerInfo";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../app/store";
+import { addToFav, removeFromFav } from "../features/counter/beerSlice";
 
 interface BeerCardProps {
   info: BeerInfo;
@@ -12,10 +15,33 @@ interface BeerCardProps {
 
 export const BeerCard = (props: BeerCardProps) => {
   const [visible, setVisible] = useState(false);
+  const isFavorite = useSelector(
+    (state: RootState) => state.beer.favorites[props.info.id] !== undefined
+  );
+  const dispatch = useDispatch();
+
+  const handleAddToFav = (
+    event: React.MouseEvent<HTMLSpanElement, MouseEvent>
+  ) => {
+    event.stopPropagation();
+    dispatch(addToFav(props.info));
+  };
+
+  const handleRemoveFromFav = (
+    event: React.MouseEvent<HTMLSpanElement, MouseEvent>
+  ) => {
+    event.stopPropagation();
+    dispatch(removeFromFav(props.info.id));
+  };
+
   return (
     <>
       <Card hoverable className="card-design" onClick={() => setVisible(true)}>
-        <StarOutlined />
+        {isFavorite ? (
+          <StarFilled className="fill-star" onClick={handleRemoveFromFav} />
+        ) : (
+          <StarOutlined onClick={handleAddToFav} />
+        )}
         <img className="beer-img" alt="beer" src={props.info.image_url} />
         <Meta title={props.info.name} />
       </Card>
@@ -40,8 +66,8 @@ export const BeerCard = (props: BeerCardProps) => {
           Food Pairing:{" "}
           {
             <ul>
-              {props.info.food_pairing.map((pairing) => (
-                <li>{pairing}</li>
+              {props.info.food_pairing.map((pairing, index) => (
+                <li key={index}>{pairing}</li>
               ))}
             </ul>
           }

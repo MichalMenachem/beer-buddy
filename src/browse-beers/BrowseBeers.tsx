@@ -1,51 +1,57 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { BeerCard } from "../beer-card/BeerCard";
 import { BeerInfo } from "../models/BeerInfo";
 import "./browse-beers.css";
+import { Input, message } from "antd";
+import axios from "axios";
 
-const beerExample: BeerInfo[] = [
-  {
-    id: "2",
-    name: "Trashy Blonde",
-    tagline: "You Know You Shouldn't",
-    first_brewed: "04/2008",
-    image_url: "https://images.punkapi.com/v2/2.png",
-    abv: "4.1",
-    volume: {
-      value: "20",
-      unit: "litres",
-    },
-    food_pairing: [
-      "Fresh crab with lemon",
-      "Garlic butter dipping sauce",
-      "Goats cheese salad",
-      "Creamy lemon bar doused in powdered sugar",
-    ],
-  },
-  {
-    id: "192",
-    name: "Punk IPA 2007 - 2010",
-    tagline: "Post Modern Classic. Spiky. Tropical. Hoppy.",
-    first_brewed: "04/2007",
-    image_url: "https://images.punkapi.com/v2/192.png",
-    abv: "6.0",
-    volume: {
-      value: "20",
-      unit: "liters",
-    },
-    food_pairing: [
-      "Spicy carne asada with a pico de gallo sauce",
-      "Shredded chicken tacos with a mango chilli lime salsa",
-      "Cheesecake with a passion fruit swirl sauce",
-    ],
-  },
-];
+const { Search } = Input;
 
 export const BrowseBeers = () => {
+  const [beers, setBeers] = useState<BeerInfo[]>([]);
+  const [foodSearch, setFoodSearch] = useState<string | undefined>(undefined);
+
+  const fetchBeers = () => {
+    axios
+      .get("https://api.punkapi.com/v2/beers", {
+        params: {
+          page: 1,
+          per_page: 12,
+          food: foodSearch,
+        },
+      })
+      .then(function (response) {
+        setBeers(response.data);
+      })
+      .catch(function (error) {
+        message.error("Oops! Something went wrong...");
+      });
+  };
+
+  useEffect(fetchBeers, []);
+
+  useEffect(fetchBeers, [foodSearch]);
+
+  const handleSearchPairing = (value: string) => {
+    if (value === "") {
+      setFoodSearch(undefined);
+    } else {
+      setFoodSearch(value.replace(/\s+/g, "_"));
+    }
+  };
+
   return (
     <>
-      {beerExample.map((beer) => (
-        <BeerCard info={beer} />
+      <div>
+        <span>Food Pairing</span>
+        <Search
+          placeholder="Enter desired food"
+          onSearch={handleSearchPairing}
+          style={{ width: 200 }}
+        />
+      </div>
+      {beers.map((beer, index) => (
+        <BeerCard key={index} info={beer} />
       ))}
     </>
   );

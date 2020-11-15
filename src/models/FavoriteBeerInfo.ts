@@ -1,5 +1,5 @@
 import { BeerInfo } from "./BeerInfo";
 
 export interface FavoriteBeerInfo extends BeerInfo {
-  rank: number;
+  rank: number | undefined;
 }
