@@ -6,7 +6,7 @@ import "./navigation-bar.css";
 export const NavigationBar = () => {
   return (
     <>
-      <Menu mode="horizontal" theme="dark">
+      <Menu className="menu-layout" mode="horizontal" theme="dark">
         <Menu.Item key="home">
           <Link to="/">
             <span className="logo-design">BeerBuddy</span>

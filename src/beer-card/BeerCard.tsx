@@ -38,9 +38,12 @@ export const BeerCard = (props: BeerCardProps) => {
     <>
       <Card hoverable className="card-design" onClick={() => setVisible(true)}>
         {isFavorite ? (
-          <StarFilled className="fill-star" onClick={handleRemoveFromFav} />
+          <StarFilled
+            className="fill-star star"
+            onClick={handleRemoveFromFav}
+          />
         ) : (
-          <StarOutlined onClick={handleAddToFav} />
+          <StarOutlined className="star" onClick={handleAddToFav} />
         )}
         <img className="beer-img" alt="beer" src={props.info.image_url} />
         <Meta title={props.info.name} />

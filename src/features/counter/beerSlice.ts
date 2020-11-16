@@ -37,9 +37,17 @@ export const beerSlice = createSlice({
         beer.rank = action.payload.rank;
       }
     },
+    removeAllFav: (state) => {
+      state.favorites = {};
+    },
   },
 });
 
-export const { addToFav, removeFromFav, updateRank } = beerSlice.actions;
+export const {
+  addToFav,
+  removeFromFav,
+  updateRank,
+  removeAllFav,
+} = beerSlice.actions;
 
 export default beerSlice.reducer;

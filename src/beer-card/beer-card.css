@@ -1,11 +1,35 @@
 .beer-img {
-  height: 5rem;
+  height: 7.2rem;
+  width: 2.3rem;
+  margin: 1rem 0;
 }
 
 .card-design {
-  width: 240px;
+  border: 1px solid #000000 !important;
+  height: 100%;
 }
 
 .fill-star {
   color: #faaf14 !important;
+}
+
+.star {
+  align-self: flex-end;
+  margin: 3px;
+  font-size: 1.2rem;
+}
+
+.card-design .ant-card-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  padding: 0px;
+}
+
+.card-design .ant-card-meta {
+  margin: 2px;
+  padding: 0 4px;
+  width: 100%;
 }
