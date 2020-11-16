@@ -57,12 +57,12 @@ export const BrowseBeers = () => {
 
   return (
     <>
-      <div>
-        <span>Food Pairing</span>
+      <div className="food-pairing">
+        <span className="pairing-text">Food Pairing</span>
         <Search
           placeholder="Enter desired food"
           onSearch={handleSearchPairing}
-          style={{ width: 200 }} // TODO: move to css
+          className="search-pairing"
         />
       </div>
       {loading ? (
@@ -78,6 +78,7 @@ export const BrowseBeers = () => {
       )}
 
       <Pagination
+        className="pagination"
         current={params.page}
         total={100}
         pageSize={8}
