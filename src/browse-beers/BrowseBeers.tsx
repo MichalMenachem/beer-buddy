@@ -5,21 +5,18 @@ import "./browse-beers.css";
 import { Input, message, Pagination, Spin } from "antd";
 import axios from "axios";
 import { DisplayBeers } from "../display-beers/DisplayBeers";
+import { useHistory, useLocation } from "react-router-dom";
 
 const { Search } = Input;
 
-interface BeerQueryParams {
-  foodSearch: string | undefined;
-  page: number;
-}
+const PER_PAGE = 8;
 
 export const BrowseBeers = () => {
   const [beers, setBeers] = useState<BeerInfo[]>([]);
-  const [params, setParams] = useState<BeerQueryParams>({
-    page: 1,
-    foodSearch: undefined,
-  });
+  const location = useLocation();
+  const query = new URLSearchParams(location.search);
   const [loading, setLoading] = useState(true);
+  const history = useHistory();
 
   const fetchBeers = () => {
     setLoading(true);
@@ -27,9 +24,9 @@ export const BrowseBeers = () => {
       axios
         .get("https://api.punkapi.com/v2/beers", {
           params: {
-            page: params.page,
-            per_page: 8,
-            food: params.foodSearch,
+            page: query.get("page") || 1,
+            per_page: PER_PAGE,
+            food: query.get("food"),
           },
         })
         .then(function (response) {
@@ -44,16 +41,27 @@ export const BrowseBeers = () => {
     }, 300);
   };
 
-  useEffect(fetchBeers, []);
-
-  useEffect(fetchBeers, [params]);
+  useEffect(fetchBeers, [location]);
 
   const handleSearchPairing = (value: string) => {
     if (value === "") {
-      setParams({ page: 1, foodSearch: undefined });
+      query.delete("food");
     } else {
-      setParams({ page: 1, foodSearch: value.replace(/\s+/g, "_") });
+      query.set("food", value.replace(/\s+/g, "_"));
     }
+    query.set("page", "1");
+    history.push({
+      pathname: "/browse",
+      search: `?${query.toString()}`,
+    });
+  };
+
+  const onPageChange = (page: number) => {
+    query.set("page", page.toString());
+    history.push({
+      pathname: "/browse",
+      search: `?${query.toString()}`,
+    });
   };
 
   return (
@@ -80,13 +88,11 @@ export const BrowseBeers = () => {
       <Pagination
         className="pagination"
         showTitle={false}
-        current={params.page}
+        current={parseInt(query.get("page") || "1")}
         total={100}
-        pageSize={8}
+        pageSize={PER_PAGE}
         showSizeChanger={false}
-        onChange={(page) =>
-          setParams({ page: page, foodSearch: params.foodSearch })
-        }
+        onChange={onPageChange}
       />
     </>
   );
