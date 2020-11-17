@@ -22,7 +22,7 @@ export const beerSlice = createSlice({
       // immutable state based off those changes
       state.favorites[action.payload.id] = {
         ...action.payload,
-        rank: undefined,
+        rank: null,
       };
     },
     removeFromFav: (state, action: PayloadAction<string>) => {
@@ -30,7 +30,7 @@ export const beerSlice = createSlice({
     },
     updateRank: (
       state,
-      action: PayloadAction<{ id: string; rank: number }>
+      action: PayloadAction<{ id: string; rank: number | null }>
     ) => {
       const beer = state.favorites[action.payload.id];
       if (beer !== undefined) {

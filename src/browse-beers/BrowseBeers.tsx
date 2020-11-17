@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import { BeerCard } from "../beer-card/BeerCard";
 import { BeerInfo } from "../models/BeerInfo";
 import "./browse-beers.css";
-import { Col, Input, message, Pagination, Row, Spin } from "antd";
+import { Input, message, Pagination, Spin } from "antd";
 import axios from "axios";
+import { DisplayBeers } from "../display-beers/DisplayBeers";
 
 const { Search } = Input;
 
@@ -68,17 +69,17 @@ export const BrowseBeers = () => {
       {loading ? (
         <Spin size="large" />
       ) : (
-        <Row className="beers-row" gutter={[16, 24]}>
-          {beers.map((beer, index) => (
-            <Col key={index} span={6}>
-              <BeerCard key={index} info={beer} />
-            </Col>
-          ))}
-        </Row>
+        <DisplayBeers
+          beers={beers}
+          renderBeer={(beer) => (
+            <BeerCard key={"Browse" + beer.id} info={beer} />
+          )}
+        />
       )}
 
       <Pagination
         className="pagination"
+        showTitle={false}
         current={params.page}
         total={100}
         pageSize={8}
