@@ -7,11 +7,7 @@ import { StarOutlined, StarFilled } from "@ant-design/icons";
 import { BeerInfo } from "../models/BeerInfo";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../app/store";
-import {
-  addToFav,
-  removeFromFav,
-  updateRank,
-} from "../features/counter/beerSlice";
+import { addToFav, removeFromFav, updateRank } from "../app/beerSlice";
 import { Col, Row, Select } from "antd";
 
 const { Option } = Select;

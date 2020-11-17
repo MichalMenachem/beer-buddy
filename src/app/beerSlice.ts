@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { BeerInfo } from "../../models/BeerInfo";
-import { FavoriteBeerInfo } from "../../models/FavoriteBeerInfo";
+import { BeerInfo } from "../models/BeerInfo";
+import { FavoriteBeerInfo } from "../models/FavoriteBeerInfo";
 
 interface BeerState {
   // maps all favorite beers' ids to their info
