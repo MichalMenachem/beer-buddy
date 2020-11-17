@@ -65,7 +65,7 @@ export const BrowseBeers = () => {
   };
 
   return (
-    <>
+    <div className="browse-layout">
       <div className="food-pairing">
         <span className="pairing-text">Food Pairing</span>
         <Search
@@ -94,6 +94,6 @@ export const BrowseBeers = () => {
         showSizeChanger={false}
         onChange={onPageChange}
       />
-    </>
+    </div>
   );
 };

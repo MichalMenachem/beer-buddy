@@ -1,6 +1,7 @@
 import React from "react";
 import { BeerCard } from "../beer-card/BeerCard";
 import "./favorite-beers.css";
+import "../browse-beers/browse-beers.css";
 import { Pagination } from "antd";
 import { DisplayBeers } from "../display-beers/DisplayBeers";
 import { useSelector } from "react-redux";
@@ -29,9 +30,8 @@ export const FavoriteBeers = () => {
 
   const page = parseInt(query.get("page") || "1");
 
-  return (
-    <>
-      <br />
+  return favoriteBeers.length !== 0 ? (
+    <div className="browse-layout">
       <RemoveAll />
       <DisplayBeers
         beers={favoriteBeers.slice((page - 1) * PER_PAGE, page * PER_PAGE)}
@@ -48,6 +48,13 @@ export const FavoriteBeers = () => {
         showSizeChanger={false}
         onChange={onPageChange}
       />
-    </>
+    </div>
+  ) : (
+    <div>
+      <br />
+      <h3>You don't have any favorite beers</h3>
+      <br />
+      <h3>Boooo! You're no fun...</h3>
+    </div>
   );
 };

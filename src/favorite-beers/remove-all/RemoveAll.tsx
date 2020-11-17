@@ -18,7 +18,7 @@ export const RemoveAll = () => {
   };
 
   return (
-    <div>
+    <>
       <Button
         disabled={noFavorites}
         className="remove-button"
@@ -35,6 +35,6 @@ export const RemoveAll = () => {
       >
         Are you sure you want to remove all your favorite beers?
       </Modal>
-    </div>
+    </>
   );
 };
