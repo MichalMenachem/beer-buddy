@@ -50,11 +50,12 @@ export const FavoriteBeers = () => {
       />
     </div>
   ) : (
-    <div>
+    <div className="no-favorites-screen">
       <br />
-      <h3>You don't have any favorite beers</h3>
+      <h2>You don't have any favorite beers</h2>
       <br />
-      <h3>Boooo! You're no fun...</h3>
+      <h3>Why don't you like us?</h3>
+      <img className="sad-beer-img" src="/assets/sad-beer.png" alt="beer" />
     </div>
   );
 };

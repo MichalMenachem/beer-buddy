@@ -1,8 +1,19 @@
 .logo-design {
   font-weight: bold;
   color: #faaf14;
+  margin: 0px 1rem;
 }
 
-.menu-layout {
+.ant-page-header-heading-extra {
+  margin-right: 1rem !important;
+}
+
+.ant-page-header-content {
+  padding-top: 6px !important;
+}
+
+.nav-layout {
   width: 100%;
+  background-color: rgba(0, 0, 0, 0.85) !important;
+  padding: 6px 5px 0px 5px !important;
 }

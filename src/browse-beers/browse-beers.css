@@ -1,8 +1,6 @@
 .beers-row {
   width: 75vw;
   height: 40vh;
-  /* min-height: 40vh;
-  max-height: 80vh; */
 }
 
 .browse-layout {
@@ -10,21 +8,21 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  height: 94vh;
+  height: 100vh;
 }
 
 .food-pairing {
   display: flex;
   align-items: center;
   margin: 1rem;
-}
-
-.search-pairing {
-  width: 200px;
+  width: 53%;
 }
 
 .pairing-text {
   width: 45%;
+  font-weight: bold;
+  font-size: 1.3rem;
+  color: #000000;
 }
 
 .pagination {

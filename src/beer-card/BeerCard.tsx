@@ -64,7 +64,9 @@ export const BeerCard = (props: BeerCardProps) => {
                   }
                   defaultValue={props.rank === null ? "" : props.rank!}
                 >
-                  <Option value=""> </Option>
+                  <Option value="" title="">
+                    {" "}
+                  </Option>
                   <Option value={5} title="">
                     5
                   </Option>
@@ -99,40 +101,50 @@ export const BeerCard = (props: BeerCardProps) => {
           </Col>
         </Row>
 
-        {/* <div className="card-header">
-          
-          
-        </div> */}
-
         <Meta title={props.info.name} />
       </Card>
       <Modal
-        title={props.info.name}
+        title={
+          <div>
+            <b>{props.info.name}</b>
+            <br />
+            <i>{props.info.tagline}</i>
+          </div>
+        }
         visible={visible}
         onOk={() => setVisible(false)}
         onCancel={() => setVisible(false)}
         cancelButtonProps={{ hidden: true }}
       >
-        <p>
-          <i>
-            <b>{props.info.tagline}</b>
-          </i>
-        </p>
-        <p>First Brewed: {props.info.first_brewed}</p>
-        <p>Alcohol Level: {props.info.abv}%</p>
-        <p>
-          Volume: {props.info.volume.value} {props.info.volume.unit}
-        </p>
-        <p>
-          Food Pairing:{" "}
-          {
-            <ul>
-              {props.info.food_pairing.map((pairing, index) => (
-                <li key={index}>{pairing}</li>
-              ))}
-            </ul>
-          }
-        </p>
+        <Row>
+          <Col className="img-col-expand" span={12}>
+            <img className="img-card-expand" src={props.info.image_url} />
+          </Col>
+          <Col className="text-col-expand" span={12}>
+            <span>&#128198; First Brewed: {props.info.first_brewed}</span>
+            <br />
+            <span>&#127867; Alcohol Level: {props.info.abv}%</span>
+            <br />
+            <span>
+              &#128208; Volume: {props.info.volume.value}{" "}
+              {props.info.volume.unit}
+            </span>
+            <br />
+            <span>
+              &#127828; Food Pairing:{" "}
+              {
+                <ul>
+                  {props.info.food_pairing.map((pairing, index) => (
+                    <li className="food-entry" key={index}>
+                      {pairing}
+                    </li>
+                  ))}
+                </ul>
+              }
+            </span>
+            <br />
+          </Col>
+        </Row>
       </Modal>
     </>
   );

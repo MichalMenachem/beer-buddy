@@ -7,22 +7,25 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 function App() {
   return (
-    <div className="App">
-      <Router>
-        <NavigationBar />
-        <Switch>
-          <Route path="/browse">
-            <BrowseBeers />
-          </Route>
-          <Route path="/favorites">
-            <FavoriteBeers />
-          </Route>
-          <Route path="/">
-            <BrowseBeers />
-          </Route>
-        </Switch>
-      </Router>
-    </div>
+    <Router>
+      <div className="App">
+        <NavigationBar>
+          <div className="beers-content">
+            <Switch>
+              <Route path="/browse">
+                <BrowseBeers />
+              </Route>
+              <Route path="/favorites">
+                <FavoriteBeers />
+              </Route>
+              <Route path="/">
+                <BrowseBeers />
+              </Route>
+            </Switch>
+          </div>
+        </NavigationBar>
+      </div>
+    </Router>
   );
 }
 

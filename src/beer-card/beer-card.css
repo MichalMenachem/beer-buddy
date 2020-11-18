@@ -17,6 +17,18 @@
   font-size: 1.2rem;
 }
 
+.img-card-expand {
+  width: 25%;
+}
+
+.img-col-expand {
+  text-align: center;
+}
+
+.text-col-expand {
+  font-size: 1rem;
+}
+
 .card-design .ant-card-body {
   display: flex;
   flex-direction: column;
