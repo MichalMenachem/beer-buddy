@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Modal } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { removeAllFav } from "../../app/beerSlice";
@@ -8,14 +8,26 @@ import { RootState } from "../../app/store";
 export const RemoveAll = () => {
   const dispatch = useDispatch();
   const [visible, setVisible] = useState(false);
+  const [removeAll, setRemoveAll] = useState(false);
   const noFavorites = useSelector(
     (state: RootState) => Object.keys(state.beer.favorites).length === 0
   );
 
+  /**
+   * Given the behavior of an open modal and its unmounting upon favorites removal,
+   * we must first close it before removing all favorite beers, otherwise it locks the scroll.
+   */
   const handleRemoveAll = () => {
-    dispatch(removeAllFav());
     setVisible(false);
+    setRemoveAll(true);
   };
+
+  useEffect(() => {
+    if (removeAll) {
+      dispatch(removeAllFav());
+      setRemoveAll(false);
+    }
+  }, [removeAll]);
 
   return (
     <>
